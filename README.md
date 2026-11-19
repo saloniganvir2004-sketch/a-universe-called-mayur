@@ -1,127 +1,139 @@
 # A UNIVERSE CALLED MAYUR
 ### An Interactive Cinematic Men's Day Appreciation Experience
 
-> *"Among billions of stars, countless galaxies, and an entire universe, there is one person whose existence makes my little world extraordinary."*
+> *"Among all the stars, galaxies and endless possibilities, there is one person at the centre of my little universe. You, Mayur."*
 
 ---
 
-## 🌟 Overview
+## 🌐 Public Live Website (Accessible Globally)
 
-**A Universe Called Mayur** is a bespoke, luxurious, cinematic web experience designed and built to celebrate **Mayur** on Men's Day.
+The website is publicly deployed and live at:
+**[https://saloniganvir2004-sketch.github.io/a-universe-called-mayur/](https://saloniganvir2004-sketch.github.io/a-universe-called-mayur/)**
 
-This is not a generic greeting card template. It is a six-scene interactive journey combining:
-1. **Cosmic Genesis**: Procedural star creation, dark matter nebula expansion, spiral galaxy rotation, and camera warp travel.
-2. **The World (Earth Approach)**: Photorealistic rotating 3D Earth canvas with Rayleigh atmospheric scattering, sunrise limb flare, and an ancient golden orbital artifact.
-3. **The Personal Letter**: An antique floating 3D envelope with a custom golden wax seal engraved with Mayur's initial, authentic seal-breaking animation, and unfolding parchment letter with staggered typography.
-4. **The Museum of You**: A private luxury gallery featuring five exhibition frames (Strength, Kindness, Ambition, Individuality, and The Masterpiece) with procedural golden-accented canvas artwork, interactive appreciation plaques, and progress gating.
-5. **The Spotlight**: A vintage theatre stage premiere with overhead golden spotlight beam, floating dust motes, and dramatic curtain-draped suspense.
-6. **The Final Reveal**: The emotional climax featuring Mayur's genuine high-resolution portrait in a magnificent gilded baroque frame with breathing light aura, title **MAYUR. ONE OF A KIND.**, heartfelt appreciation message, and an interactive curated archive featuring his adventures and reflections.
+- **Public HTTPS URL**: `https://saloniganvir2004-sketch.github.io/a-universe-called-mayur/`
+- **GitHub Repository**: `https://github.com/saloniganvir2004-sketch/a-universe-called-mayur`
+- **Compatibility**: Accessible across mobile phones (iOS Safari, Android Chrome), tablets, and desktop browsers worldwide.
 
 ---
 
-## 🚀 How to Run Locally
+## 🌟 Creative Direction & Architecture
 
-The website is 100% self-contained and runs immediately on macOS, Linux, or Windows without any dependencies, build steps, or internet access required.
+**A Universe Called Mayur** is a dedicated cinematic digital tribute celebrating **Mayur** on Men's Day.
 
-### Method 1: Direct File Open (Fastest)
-1. Double-click or open `index.html` in any modern web browser (Google Chrome, Apple Safari, Mozilla Firefox, Microsoft Edge, or Arc).
-   - On macOS:
-     ```bash
-     open /Users/saloniganvir/.gemini/antigravity/scratch/mayur-mens-day/index.html
-     ```
+### The Six Connected Cinematic Scenes:
 
-### Method 2: Local HTTP Server (Recommended for optimal asset loading)
-Open your terminal and run:
+1. **Scene 01 — The Creation of the Universe**:
+   - Opens in complete darkness with a central concentrated singularity point.
+   - User clicks **`CREATE OUR UNIVERSE`** to ignite the true Big Bang creation sequence:
+     1. Singularity pulse and energy build-up
+     2. Explosive Big Bang particle shockwave and radiant expansion
+     3. Star formation with multi-depth 3D parallax
+     4. Nebula clouds blooming in cosmic sapphire, violet, and antique gold
+     5. Spiral galaxy formation and core rotation
+     6. Sequential typography reveal:
+        - *"EVERY UNIVERSE BEGINS SOMEWHERE."*
+        - *"BUT THIS ONE HAS A NAME."*
+        - *"MAYUR."*
+        - *"A UNIVERSE CALLED MAYUR — HAPPY MEN'S DAY, MAYUR!"*
+        - *"In all the vastness of existence, there is one person at the centre of my little universe. You."*
+     7. Interactive button: **`ENTER YOUR UNIVERSE →`** (triggers camera-forward warp speed streak transit into Earth orbit).
+
+2. **Scene 02 — Earth (The World)**:
+   - Photorealistic rotating Earth canvas with Rayleigh blue atmospheric scattering, day/night terminus shadow, and golden sunrise limb glare.
+   - Poetic narrative:
+     - *"Out of this endless universe, there is one little world I call mine."*
+     - *"And in that world, Mayur, you hold a place that belongs to nobody else."*
+     - *"If the universe is endless, my appreciation for you is endless too."*
+   - Orbiting celestial antique golden relic (`interactive-golden-artifact`).
+   - Button: **`DISCOVER WHAT THE UNIVERSE HAS LEFT FOR YOU →`**
+
+3. **Scene 03 — The Antique Personal Letter**:
+   - Dark antique desk environment with flickering candlelight ambient shadows and floating golden motes.
+   - Physical antique 3D envelope with custom engraved wax seal ("M") and recipient inscription: *"Dedicated Exclusively To Mayur"*.
+   - Clicking breaks the seal with crackle SFX, unfolds the 3D flap, and slides out an aged ivory parchment with deckled edges.
+   - Handwritten text in dark sepia ink:
+     > *"Dear Mayur,*  
+     > *If I could give you one thing today, it would be the ability to see yourself through my eyes, even for a moment.*  
+     > *You would understand how much there is to appreciate about you.*  
+     > *Your strength, your determination, your kindness, your efforts, and all the little things that make you who you are.*  
+     > *I hope you never feel that you have to be strong every moment. You deserve to be understood, supported, celebrated and appreciated, too.*  
+     > *I want you to keep believing in yourself, keep chasing everything you dream of, and never forget how much your existence means to me.*  
+     > *You are not just another person in my world. You are the person who gives my little universe its meaning.*  
+     > *Today, I celebrate you.*  
+     > *Happy Men’s Day, Mayur.*  
+     > *With love."*
+   - Post-letter: *"There is still so much about you worth celebrating."*
+   - Button: **`VISIT YOUR PRIVATE GALLERY →`**
+
+4. **Scene 04 — The Architectural Museum of Mayur**:
+   - **Grand Foyer**: Double mahogany and bronze entrance doors with brass handles and plaque:  
+     *THE MUSEUM OF MAYUR • A PRIVATE EXHIBITION • DEDICATED TO ONE EXTRAORDINARY PERSON.*  
+     Clicking **`PUSH TO ENTER GALLERY →`** swings the double doors outward in 3D with authentic door sound.
+   - **Hallway Promenade**: Vaulted gallery with polished black marble floors reflecting lights, dark panel walls, warm wall sconces, and directional overhead spotlights.
+   - **Five Distinct Wing Chambers**:
+     - *Exhibition 01 — THE STRENGTH*: Alpine peaks under golden starlight in gilded baroque frame. Plaque: *"For the strength you carry, the challenges you face, and the determination with which you keep moving forward."*
+     - *Exhibition 02 — THE KINDNESS*: Dawn sunlight filtering through golden mist. Plaque: *"For the goodness in your actions, the warmth in your nature, and the little things that make you special."*
+     - *Exhibition 03 — THE AMBITION*: Sunrise horizon highway. Plaque: *"For your dreams, your efforts, your determination, and everything you are working towards."*
+     - *Exhibition 04 — THE INDIVIDUALITY*: Cosmic constellation. Plaque: *"For everything that makes you who you are. The qualities, personality and individuality that nobody else can replace."*
+     - *Exhibition 05 — THE MASTERPIECE*: Covered in deep velvet curtains with golden cords. Locked until exhibits 1–4 are explored. Plaque: *"Every gallery has its most precious exhibit. And this one has been waiting for you."*
+   - Dedicated **`APPROACH ARTWORK (Inspect Plaque) 🔍`** button opens an opulent curator plaque modal with artwork and reflection.
+   - Unlocking Wing 05 enables **`ENTER THE FINAL GALLERY →`**, dimming corridor lights and pushing the camera forward.
+
+5. **Scene 05 — The Theatre & Spotlight**:
+   - Pitch-black stage with an overhead golden spotlight cutting through darkness and illuminated dust motes.
+   - Text reveal:
+     - *"AFTER EXPLORING EVERY CHAPTER..."*
+     - *"AFTER DISCOVERING EVERY LITTLE DETAIL..."*
+     - *"THERE IS STILL ONE PERSON THIS ENTIRE UNIVERSE WAS CREATED FOR."*
+     - *"MAYUR. THE SPOTLIGHT IS YOURS."*
+   - Button: **`REVEAL THE PERSON BEHIND THIS UNIVERSE →`** (dramatic velvet curtains part open).
+
+6. **Scene 06 — The Grand Photograph Reveal (Climax)**:
+   - Magnificent gilded baroque portrait frame illuminating **Mayur's authentic high-resolution photograph** (`assets/images/mayur/mayur-portrait-main.jpg`) with breathing golden aura.
+   - Title: **MAYUR. THE PERSON AT THE CENTRE OF MY UNIVERSE.**
+   - Emotional appreciation message:
+     > *"Among all the stars, galaxies and endless possibilities, there is one person I would choose to dedicate this universe to, again and again.*  
+     > *You.*  
+     > *I hope life brings you everything your heart works for. May you always have the courage to chase your dreams, the strength to face every challenge, and countless reasons to smile.*  
+     > *Never underestimate how special you are or how much you are appreciated.*  
+     > *You deserve to be celebrated, not just today, but every day.*  
+     > *HAPPY MEN’S DAY, MAYUR."*
+   - Closing line:  
+     *“IF I HAD AN ENTIRE UNIVERSE TO DEDICATE TO SOMEONE, I WOULD STILL CHOOSE YOU.”*
+   - Expandable Curated Archive:  
+     - **The Free Spirit** (`mayur-horse-journey.jpg`)
+     - **The Visionary** (`mayur-mountains-vision.jpg`)
+   - Replay option: **`REVISIT THE EXPERIENCE ↺`**
+
+---
+
+## 🎵 Featured Soundtrack: "O Mere Dil Ke Chain" (Kishore Kumar, 1972)
+
+- **Dedicated Music Controller**: Floating pill in the upper-right corner displaying:
+  - Song Title: **O MERE DIL KE CHAIN**
+  - Artist Info: **Kishore Kumar • Mere Jeevan Saathi (1972)**
+  - Play/Pause toggle, Mute/Unmute toggle, Volume Slider, and Playback progress bar with time counter.
+- **Built-in Vintage Instrumental Arrangement**: Built-in Web Audio API synthesizer that recreates the melody of "O Mere Dil Ke Chain" (Rhodes/harmonium chord pads + analog flute/sax lead with vibrato and tape warmth).
+- **Custom Local MP3 Support**: Checks for `assets/audio/o-mere-dil-ke-chain.mp3` or `assets/audio/background.mp3`. If present, it seamlessly plays the audio file while retaining all interactive sound effects.
+- **Dynamic Mood Sync**: Music softly accompanies the letter, builds in intensity during the spotlight, and reaches maximum warmth during Mayur's portrait reveal.
+- **No Scene Resets**: Music continues playing smoothly across scene transitions.
+
+---
+
+## 📸 Photograph Fidelity & Assets
+
+All three authentic photographs of Mayur are preserved with 100% facial identity:
+- `assets/images/mayur/mayur-portrait-main.jpg` (Centerpiece portrait)
+- `assets/images/mayur/mayur-horse-journey.jpg` (The Free Spirit)
+- `assets/images/mayur/mayur-mountains-vision.jpg` (The Visionary)
+
+---
+
+## 💻 Local Launch Instructions
+
+To run locally on macOS:
 ```bash
 cd /Users/saloniganvir/.gemini/antigravity/scratch/mayur-mens-day
 python3 -m http.server 8080
 ```
-Then visit in your browser:
-```
-http://localhost:8080
-```
-
----
-
-## 📸 Photograph Integration & Facial Fidelity
-
-All user-supplied authentic photographs of Mayur have been inspected, categorized, and integrated into local assets under `assets/images/mayur/`:
-
-1. **Centerpiece Portrait (`mayur-portrait-main.jpg`)**:
-   - Mayur standing at night against mountain lights, smiling warmly, in crisp white and navy attire.
-   - Preserves 100% natural facial identity, zero distortion, zero artificial face morphs, and exact original aspect ratio.
-   - Displayed in Scene 06 in the grand gilded frame with soft golden aura and breathing illumination.
-2. **The Free Spirit (`mayur-horse-journey.jpg`)**:
-   - Mayur on horseback along mountain trails.
-   - Curated in Scene 06's interactive archive drawer (*"The Explorer"*).
-3. **The Visionary (`mayur-mountains-vision.jpg`)**:
-   - Mayur seated in thoughtful reflection with mountains bathed in dawn mist.
-   - Curated in Scene 06's interactive archive drawer (*"The Visionary"*).
-
----
-
-## 🎵 Soundtrack & Audio Engine
-
-- **Web Audio API Procedural Synthesizer**: Built directly into the website with zero external dependencies. It automatically generates a warm, Hans Zimmer / Interstellar-style celestial ambient drone pad with gentle pentatonic chime droplets that twinkle like distant stars.
-- **Sound Effects (SFX)**: Includes procedural sound effects for warp travel whoosh, wax seal crack, theatre spotlight switch-on, and velvet curtain sweep.
-- **Custom MP3 Support**: To use your own MP3 song, simply drop an MP3 named `background.mp3` into `assets/audio/`. The audio engine automatically detects it and plays your track while keeping all interactive sound effects active.
-- **Controls**: Includes a visible mute/unmute button, animated visualizer bars, and a volume slider in the top right. Adheres to browser autoplay policies (sound activates cleanly on user click).
-
----
-
-## 🧭 Navigation & Interaction Sequence
-
-The website implements a strict state machine preventing accidental skips or double-click glitches:
-
-| Scene | Name | Interaction | Next Step |
-|---|---|---|---|
-| **01** | The Creation of the Universe | Watch universe ignite from a single star | Click **EXPLORE YOUR UNIVERSE →** (triggers warp trails) |
-| **02** | The World | Earth rotation & atmospheric sun glare | Click **DISCOVER WHAT’S WAITING FOR YOU →** |
-| **03** | The Personal Letter | Floating envelope with golden seal | Click envelope or **OPEN YOUR LETTER** (breaks seal, unfolds letter) → Click **THERE’S MORE TO DISCOVER →** |
-| **04** | The Museum of You | 4 Appreciation frames + 1 Masterpiece | Click each exhibit (Strength, Kindness, Ambition, Individuality) to view plaque modal. Once 4/4 viewed, Exhibit 05 unlocks → Click **REVEAL THE FINAL EXHIBIT →** |
-| **05** | The Spotlight | Dark theatre stage with spotlight beam & motes | Click **AND NOW, THE MAIN CHARACTER →** (curtains part) |
-| **06** | The Final Reveal | Emotional climax with portrait & message | Read appreciation message, explore curated archive, or revisit |
-
-A minimal glowing chapter indicator (`01 / 06` to `06 / 06`) sits at the bottom-left for orientation and allows revisiting unlocked chapters.
-
----
-
-## 📁 Project Structure
-
-```
-mayur-mens-day/
-├── index.html                  # Semantic, accessible HTML5 single-page application
-├── css/
-│   ├── style.css               # Luxury color tokens, layout, typography & UI styling
-│   ├── animations.css          # Filmic keyframes, transitions & reduced-motion queries
-│   └── responsive.css          # Multi-device breakpoints (Mobile, Tablet, Desktop)
-├── js/
-│   ├── main.js                 # App initialization, lifecycle & keyboard accessibility
-│   ├── navigation.js           # Strict scene state machine & transition locks
-│   ├── effects.js              # 60FPS procedural canvas engines (Cosmic, Earth, Particles)
-│   ├── animations.js           # DOM interactions, letter unfolding, museum & curtain logic
-│   └── audio.js                # Web Audio API ambient soundtrack & procedural SFX
-├── assets/
-│   ├── images/
-│   │   ├── mayur/
-│   │   │   ├── mayur-portrait-main.jpg     # Centerpiece reveal portrait
-│   │   │   ├── mayur-horse-journey.jpg     # Horse trail expedition
-│   │   │   └── mayur-mountains-vision.jpg  # Mountain reflection
-│   │   ├── backgrounds/
-│   │   └── gallery/
-│   └── audio/
-│       └── README.txt          # Audio placement instructions
-└── README.md                   # Complete documentation
-```
-
----
-
-## 🧪 Tests Performed
-
-1. **DOM & Asset Integrity**: All 43 unique IDs verified; all image files verified on local disk.
-2. **JavaScript Syntax Verification**: Verified via `node --check` across all 5 JS files with zero syntax errors.
-3. **Responsive Layouts**: Tested on desktop (1920x1080), laptop (1440x900), tablet (768x1024), and mobile viewports (375x667, 414x896) with zero text truncation or horizontal overflow.
-4. **Transition Lock Protection**: Double-clicking navigation buttons disabled during active animation transitions.
-5. **Gating Verification**: Exhibit 05 remains disabled until all 4 preceding exhibits have been opened.
-6. **Audio Policy Compliance**: Audio context initializes only upon intentional user interaction; graceful fallback to Web Audio synthesizer when offline.
-7. **Facial Fidelity**: Original image proportions preserved via CSS `object-fit: cover` / `object-position: center top` with fixed container aspect ratios.
+Then open `http://localhost:8080` in your web browser, or directly double-click `index.html`.
