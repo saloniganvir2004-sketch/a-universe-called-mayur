@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Universe Called Mayur — Men’s Day Appreciation</title>
+  
+  <!-- Web Fonts with Local Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Filmic Texture & Vignette Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+
+  <!-- Persistent Luxury Header with O Mere Dil Ke Chain Player -->
+  <header class="experience-header">
+    <div class="brand-title">A Universe Called Mayur</div>
+    
+    <div class="header-right">
+      <!-- Vintage Bollywood Music Controller -->
+      <div class="music-player-container" title="Soundtrack: O Mere Dil Ke Chain (Kishore Kumar, 1972)">
+        <div class="music-meta">
+          <span id="audio-song-title" class="song-title-label">O MERE DIL KE CHAIN</span>
+          <span id="audio-song-artist" class="song-artist-label">Kishore Kumar (1972)</span>
+        </div>
+
+        <div class="player-controls-group">
+          <button id="audio-play-pause-btn" class="player-btn" aria-label="Play Soundtrack">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+          
+          <button id="audio-mute-btn" class="player-btn" aria-label="Mute/Unmute">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+
+          <div id="audio-visualizer-bars" class="audio-bars" aria-hidden="true">
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+          </div>
+
+          <div class="audio-progress-track">
+            <div id="audio-progress-bar" class="audio-progress-bar"></div>
+          </div>
+
+          <input type="range" id="audio-volume-slider" class="audio-volume-slider" min="0" max="1" step="0.05" value="0.7" title="Volume">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Glowing Chapter Progress Indicator -->
+  <nav class="chapter-indicator" aria-label="Chapter Progress">
+    <div id="chapter-current-num" class="chapter-number">01 / 06</div>
+    <div class="chapter-dots">
+      <span class="chapter-dot active" data-scene="1" title="Scene 1: Creation of Universe"></span>
+      <span class="chapter-dot" data-scene="2" title="Scene 2: The World"></span>
+      <span class="chapter-dot" data-scene="3" title="Scene 3: Antique Letter"></span>
+      <span class="chapter-dot" data-scene="4" title="Scene 4: The Museum"></span>
+      <span class="chapter-dot" data-scene="5" title="Scene 5: The Spotlight"></span>
+      <span class="chapter-dot" data-scene="6" title="Scene 6: The Grand Reveal"></span>
+    </div>
+  </nav>
+
+  <!-- Viewport Stage Container -->
+  <main id="viewport-container">
+
+    <!-- ====================================================================
+         SCENE 01 — THE CREATION OF THE UNIVERSE (REBUILT)
+         ==================================================================== -->
+    <section id="scene-01" class="scene active" aria-label="The Creation of the Universe">
+      <canvas id="canvas-scene-01" class="scene-canvas"></canvas>
+
+      <!-- Initial State: Singularity Button -->
+      <div class="singularity-trigger-container">
+        <button id="btn-create-universe" class="cinematic-btn btn-create-universe">
+          Create Our Universe <span class="btn-arrow">✨</span>
+        </button>
+      </div>
+
+      <div class="scene-content">
+        <!-- Sequential Typography Revealed After Big Bang -->
+        <p id="narrative-line-1" class="narrative-line">Every universe begins somewhere.</p>
+        <p id="narrative-line-2" class="narrative-line">But this one has a name.</p>
+        <h2 id="narrative-line-3" class="narrative-line narrative-name">MAYUR.</h2>
+
+        <div id="universe-title-block" class="universe-title-block">
+          <div class="cosmic-subheading">Happy Men’s Day, Mayur!</div>
+          <h1 class="cosmic-title">A Universe Called Mayur</h1>
+          <p class="cosmic-quote">
+            “In all the vastness of existence, there is one person at the centre of my little universe. You.”
+          </p>
+          <button id="btn-enter-universe" class="cinematic-btn" disabled>
+            Enter Your Universe <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 02 — THE WORLD (EARTH APPROACH)
+         ==================================================================== -->
+    <section id="scene-02" class="scene" aria-label="The World">
+      <canvas id="canvas-scene-02" class="scene-canvas"></canvas>
+
+      <div class="earth-container">
+        <div class="earth-sphere">
+          <canvas id="earth-canvas" class="earth-canvas"></canvas>
+          <div class="earth-glow"></div>
+        </div>
+      </div>
+      <div class="sun-glare"></div>
+
+      <div class="scene-content">
+        <div class="world-text-container">
+          <p class="world-line">Out of this endless universe, there is one little world I call mine.</p>
+          <p class="world-line">And in that world, Mayur, you hold a place that belongs to nobody else.</p>
+          <p class="world-line world-line-highlight">If the universe is endless, my appreciation for you is endless too.</p>
+        </div>
+
+        <div class="golden-artifact-wrapper">
+          <div id="interactive-golden-artifact" class="glowing-capsule" title="An antique golden relic orbiting the planet">
+            <div class="capsule-core"></div>
+            <div class="capsule-ring"></div>
+          </div>
+          <button id="btn-discover-world" class="cinematic-btn">
+            Discover What The Universe Has Left For You <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 03 — THE ANTIQUE PERSONAL LETTER
+         ==================================================================== -->
+    <section id="scene-03" class="scene" aria-label="The Personal Letter">
+      <canvas id="canvas-scene-03" class="scene-canvas"></canvas>
+
+      <div class="scene-content">
+        <div class="letter-scene-wrapper">
+          <div class="letter-prompt">A Little Something, Just For You</div>
+
+          <!-- 3D Antique Envelope -->
+          <div id="letter-envelope" class="envelope-container" title="Click to break seal and open letter">
+            <div class="envelope-body">
+              <div class="envelope-recipient">
+                <div class="recipient-label">Dedicated Exclusively To</div>
+                <div class="recipient-name">Mayur</div>
+              </div>
+            </div>
+            <div id="envelope-flap" class="envelope-flap"></div>
+            <div id="envelope-seal" class="envelope-seal">
+              <span class="seal-initial">M</span>
+            </div>
+          </div>
+
+          <button id="btn-open-letter" class="cinematic-btn" style="margin-top: 2rem;">
+            Open Your Letter <span class="btn-arrow">✉</span>
+          </button>
+
+          <!-- Aged Ivory Parchment with Authentic Hand-inked Typography -->
+          <div id="letter-paper" class="letter-paper">
+            <h2 class="letter-salutation">Dear Mayur,</h2>
+            <div class="letter-body">
+              <p class="letter-paragraph">
+                If I could give you one thing today, it would be the ability to see yourself through my eyes, even for a moment.
+              </p>
+              <p class="letter-paragraph">
+                You would understand how much there is to appreciate about you.
+              </p>
+              <p class="letter-paragraph">
+                Your strength, your determination, your kindness, your efforts, and all the little things that make you who you are.
+              </p>
+              <p class="letter-paragraph">
+                I hope you never feel that you have to be strong every moment. You deserve to be understood, supported, celebrated and appreciated, too.
+              </p>
+              <p class="letter-paragraph">
+                I want you to keep believing in yourself, keep chasing everything you dream of, and never forget how much your existence means to me.
+              </p>
+              <p class="letter-paragraph">
+                You are not just another person in my world. You are the person who gives my little universe its meaning.
+              </p>
+              <p class="letter-paragraph">
+                Today, I celebrate you.
+              </p>
+              <p class="letter-paragraph" style="font-weight: 600; color: #3C220E;">
+                Happy Men’s Day, Mayur.
+              </p>
+              <div class="letter-valediction letter-paragraph">
+                With love.
+              </div>
+            </div>
+
+            <div class="letter-next-action">
+              <div class="letter-post-quote">There is still so much about you worth celebrating.</div>
+              <button id="btn-visit-gallery" class="cinematic-btn">
+                Visit Your Private Gallery <span class="btn-arrow">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 04 — THE ARCHITECTURAL MUSEUM OF MAYUR (PROMENADE)
+         ==================================================================== -->
+    <section id="scene-04" class="scene" aria-label="The Architectural Museum of Mayur">
+      
+      <!-- Foyer: Double Mahogany Museum Entrance Doors -->
+      <div id="museum-foyer-view" class="museum-foyer-view">
+        <div class="foyer-archway">
+          <div class="foyer-subtitle">A Private Exhibition</div>
+          <h2 class="foyer-title">The Museum of Mayur</h2>
+          <div class="foyer-dedication">Dedicated to One Extraordinary Person</div>
+
+          <!-- Double Doors -->
+          <div id="museum-entrance-doors" class="museum-entrance-doors" title="Click to push doors open">
+            <div class="museum-door-panel museum-door-left">
+              <div class="door-handle"></div>
+            </div>
+            <div class="museum-door-panel museum-door-right">
+              <div class="door-handle"></div>
+            </div>
+          </div>
+
+          <button id="btn-enter-museum-doors" class="cinematic-btn">
+            Push to Enter Gallery <span class="btn-arrow">🏛️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- The Grand Hallway Promenade -->
+      <div id="museum-hallway-view" class="museum-hallway-view">
+        <!-- Top Promenade Status Bar -->
+        <div class="hallway-nav-bar">
+          <div id="museum-progress-pill" class="hallway-progress-badge">0 of 4 exhibits explored</div>
+          
+          <div class="hallway-wing-tabs">
+            <button class="museum-wing-tab active" data-wing="0">01. Strength</button>
+            <button class="museum-wing-tab" data-wing="1">02. Kindness</button>
+            <button class="museum-wing-tab" data-wing="2">03. Ambition</button>
+            <button class="museum-wing-tab" data-wing="3">04. Individuality</button>
+            <button class="museum-wing-tab tab-locked" data-wing="4">05. Masterpiece 🔒</button>
+          </div>
+        </div>
+
+        <!-- Hallway Promenade Stage Viewport -->
+        <div class="hallway-stage-viewport">
+          <div id="museum-wings-track" class="museum-wings-track">
+            
+            <!-- Wing 01: The Strength -->
+            <div id="wing-chamber-strength" class="wing-chamber">
+              <div class="gallery-spotlight-cone"></div>
+              <div class="wing-artwork-frame">
+                <div class="wing-canvas-inner">
+                  <canvas id="canvas-wing-strength" class="wing-artwork-canvas"></canvas>
+                </div>
+              </div>
+              <div class="wing-plaque">
+                <div class="wing-badge">Exhibition 01</div>
+                <h3 class="wing-title">The Strength</h3>
+                <p class="wing-desc">“For the strength you carry, the challenges you face, and the determination with which you keep moving forward.”</p>
+                <button class="cinematic-btn cinematic-btn-secondary btn-inspect-plaque" onclick="window.sceneAnimations.openCuratorModal(0)">
+                  Approach Artwork (Inspect Plaque) 🔍
+                </button>
+              </div>
+            </div>
+
+            <!-- Wing 02: The Kindness -->
+            <div id="wing-chamber-kindness" class="wing-chamber">
+              <div class="gallery-spotlight-cone"></div>
+              <div class="wing-artwork-frame">
+                <div class="wing-canvas-inner">
+                  <canvas id="canvas-wing-kindness" class="wing-artwork-canvas"></canvas>
+                </div>
+              </div>
+              <div class="wing-plaque">
+                <div class="wing-badge">Exhibition 02</div>
+                <h3 class="wing-title">The Kindness</h3>
+                <p class="wing-desc">“For the goodness in your actions, the warmth in your nature, and the little things that make you special.”</p>
+                <button class="cinematic-btn cinematic-btn-secondary btn-inspect-plaque" onclick="window.sceneAnimations.openCuratorModal(1)">
+                  Approach Artwork (Inspect Plaque) 🔍
+                </button>
+              </div>
+            </div>
+
+            <!-- Wing 03: The Ambition -->
+            <div id="wing-chamber-ambition" class="wing-chamber">
+              <div class="gallery-spotlight-cone"></div>
+              <div class="wing-artwork-frame">
+                <div class="wing-canvas-inner">
+                  <canvas id="canvas-wing-ambition" class="wing-artwork-canvas"></canvas>
+                </div>
+              </div>
+              <div class="wing-plaque">
+                <div class="wing-badge">Exhibition 03</div>
+                <h3 class="wing-title">The Ambition</h3>
+                <p class="wing-desc">“For your dreams, your efforts, your determination, and everything you are working towards.”</p>
+                <button class="cinematic-btn cinematic-btn-secondary btn-inspect-plaque" onclick="window.sceneAnimations.openCuratorModal(2)">
+                  Approach Artwork (Inspect Plaque) 🔍
+                </button>
+              </div>
+            </div>
+
+            <!-- Wing 04: The Individuality -->
+            <div id="wing-chamber-individuality" class="wing-chamber">
+              <div class="gallery-spotlight-cone"></div>
+              <div class="wing-artwork-frame">
+                <div class="wing-canvas-inner">
+                  <canvas id="canvas-wing-individuality" class="wing-artwork-canvas"></canvas>
+                </div>
+              </div>
+              <div class="wing-plaque">
+                <div class="wing-badge">Exhibition 04</div>
+                <h3 class="wing-title">The Individuality</h3>
+                <p class="wing-desc">“For everything that makes you who you are. The qualities, personality and individuality that nobody else can replace.”</p>
+                <button class="cinematic-btn cinematic-btn-secondary btn-inspect-plaque" onclick="window.sceneAnimations.openCuratorModal(3)">
+                  Approach Artwork (Inspect Plaque) 🔍
+                </button>
+              </div>
+            </div>
+
+            <!-- Wing 05: The Masterpiece (Grand Final Rotunda) -->
+            <div id="wing-chamber-masterpiece" class="wing-chamber wing-chamber-masterpiece">
+              <div class="gallery-spotlight-cone"></div>
+              <div class="wing-artwork-frame">
+                <div class="masterpiece-drapes-container">
+                  <div id="curtain-left" class="velvet-curtain-left"></div>
+                  <div id="curtain-right" class="velvet-curtain-right"></div>
+                  <div class="curtain-center-tassel"></div>
+                  <div class="masterpiece-teaser-text">
+                    Some masterpieces deserve their own spotlight.
+                  </div>
+                </div>
+              </div>
+              <div class="wing-plaque">
+                <div class="wing-badge">Exhibition 05 • The Climax</div>
+                <h3 class="wing-title">The Masterpiece</h3>
+                <p class="wing-desc">“Every gallery has its most precious exhibit. And this one has been waiting for you.”</p>
+                <button id="btn-enter-final-gallery" class="cinematic-btn disabled" disabled>
+                  Explore Exhibits 1–4 to Unlock <span class="btn-arrow">🔒</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Promenade Bottom Navigation Bar -->
+        <div class="hallway-bottom-controls">
+          <button id="btn-museum-prev-wing" class="cinematic-btn cinematic-btn-secondary promenade-btn" disabled>
+            ← Previous Gallery
+          </button>
+          <div id="museum-curator-hint" class="museum-curator-hint"></div>
+          <button id="btn-museum-next-wing" class="cinematic-btn cinematic-btn-secondary promenade-btn">
+            Next Gallery →
+          </button>
+        </div>
+      </div>
+
+      <!-- Curator Plaque Modal -->
+      <div id="museum-modal-backdrop" class="museum-modal-backdrop" role="dialog" aria-modal="true">
+        <div class="museum-modal">
+          <button id="modal-close-btn" class="modal-close-btn" aria-label="Close Plaque">✕</button>
+          <div id="modal-tag" class="modal-tag">Exhibition 01</div>
+          <h3 id="modal-title" class="modal-title">The Strength</h3>
+          <div class="modal-visual-frame">
+            <canvas id="modal-visual-canvas" width="500" height="360" style="width: 100%; height: 100%; object-fit: cover;"></canvas>
+          </div>
+          <p id="modal-message" class="modal-message"></p>
+          <p id="modal-deep-thought" class="modal-deep-thought"></p>
+          <button class="cinematic-btn cinematic-btn-secondary" onclick="document.getElementById('modal-close-btn').click();">
+            Return to Hallway Promenade
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 05 — THE THEATRE AND SPOTLIGHT
+         ==================================================================== -->
+    <section id="scene-05" class="scene" aria-label="The Theatre and Spotlight">
+      <canvas id="canvas-scene-05" class="scene-canvas"></canvas>
+
+      <div id="grand-theatre-stage" class="theatre-stage">
+        <!-- Overhead Golden Spotlight Cones -->
+        <div class="spotlight-cone"></div>
+        <div class="spotlight-pool"></div>
+
+        <div class="theatre-content">
+          <p id="theatre-line-1" class="theatre-line">After exploring every chapter...</p>
+          <p id="theatre-line-2" class="theatre-line">After discovering every little detail...</p>
+          <p id="theatre-line-3" class="theatre-line">There is still one person this entire universe was created for.</p>
+          <h2 id="theatre-line-4" class="theatre-line theatre-name">MAYUR.<br><span style="font-size: 0.45em; letter-spacing: 0.35em; color: var(--color-champagne);">The Spotlight is Yours.</span></h2>
+          
+          <button id="btn-reveal-main-character" class="cinematic-btn" disabled>
+            Reveal The Person Behind This Universe <span class="btn-arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Grand Theatre Curtains -->
+        <div class="grand-theatre-curtains">
+          <div class="grand-curtain-panel grand-curtain-left"></div>
+          <div class="grand-curtain-panel grand-curtain-right"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 06 — THE GRAND PHOTOGRAPH REVEAL (CLIMAX)
+         ==================================================================== -->
+    <section id="scene-06" class="scene" aria-label="The Grand Photograph Reveal">
+      <canvas id="canvas-scene-06" class="scene-canvas"></canvas>
+
+      <div class="reveal-container">
+        
+        <!-- Grand Gilded Frame with Real Mayur Photograph -->
+        <div class="master-portrait-container">
+          <div class="portrait-halo-glow"></div>
+          <div class="portrait-gilded-frame">
+            <div class="portrait-inner-bevel">
+              <img 
+                src="assets/images/mayur/mayur-portrait-main.jpg" 
+                alt="Portrait of Mayur smiling warmly under the night sky" 
+                class="mayur-main-photo"
+                loading="eager"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Identity & Central Title -->
+        <div class="reveal-identity">
+          <h2 class="reveal-name">Mayur.</h2>
+          <div class="reveal-descriptor">The Person at the Centre of My Universe.</div>
+        </div>
+
+        <!-- Final Emotional Appreciation Message -->
+        <div class="reveal-message-card">
+          <p class="reveal-paragraph">
+            Among all the stars, galaxies and endless possibilities, there is one person I would choose to dedicate this universe to, again and again.
+          </p>
+          <p class="reveal-paragraph" style="font-size: 1.35rem; color: var(--color-gold-pale); font-style: italic;">
+            You.
+          </p>
+          <p class="reveal-wishes">
+            I hope life brings you everything your heart works for. May you always have the courage to chase your dreams, the strength to face every challenge, and countless reasons to smile.
+          </p>
+          <p class="reveal-paragraph">
+            Never underestimate how special you are or how much you are appreciated.
+          </p>
+          <p class="reveal-celebration">
+            You deserve to be celebrated, not just today, but every day.
+          </p>
+          <p class="reveal-celebration" style="margin-top: 0.8rem; font-size: 1.5rem;">
+            HAPPY MEN’S DAY, MAYUR.
+          </p>
+        </div>
+
+        <div class="reveal-closing">
+          “If I had an entire universe to dedicate to someone, I would still choose you.”
+        </div>
+
+        <!-- Curated Archive Accordion (The Free Spirit & The Visionary) -->
+        <button id="btn-toggle-archive" class="cinematic-btn cinematic-btn-secondary archive-trigger-btn">
+          View the Archive: Glimpses of a Journey <span class="btn-arrow">↓</span>
+        </button>
+
+        <div id="archive-gallery-container" class="archive-gallery-container">
+          <div class="archive-grid">
+            <div class="archive-card">
+              <div class="archive-frame">
+                <img src="assets/images/mayur/mayur-horse-journey.jpg" alt="Mayur on an equestrian journey in the hills" class="archive-photo">
+              </div>
+              <h4 class="archive-title">The Free Spirit</h4>
+              <p class="archive-desc">Courage to explore untrodden trails, embrace adventure, and carry an untamed warmth wherever he goes.</p>
+            </div>
+
+            <div class="archive-card">
+              <div class="archive-frame">
+                <img src="assets/images/mayur/mayur-mountains-vision.jpg" alt="Mayur in quiet reflection overlooking mountain peaks" class="archive-photo">
+              </div>
+              <h4 class="archive-title">The Visionary</h4>
+              <p class="archive-desc">Quiet thoughtfulness, grounded confidence, and looking toward horizons yet to be conquered.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replay / Revisit Option -->
+        <div class="final-navigation-group">
+          <button id="btn-restart-experience" class="cinematic-btn cinematic-btn-secondary">
+            Revisit The Experience ↺
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript Engines -->
+  <script src="js/audio.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

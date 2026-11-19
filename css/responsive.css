@@ -1,0 +1,228 @@
+/* ==========================================================================
+   A UNIVERSE CALLED MAYUR — Responsive Layouts
+   Desktop, Laptop, Tablet, Mobile (Portrait & Landscape)
+   ========================================================================== */
+
+/* Laptops & Medium Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --scene-padding: 2rem;
+  }
+
+  .experience-header {
+    height: 70px;
+  }
+
+  .song-artist-label {
+    display: none; /* Keep music pill compact */
+  }
+
+  .audio-progress-track {
+    display: none;
+  }
+
+  .audio-volume-slider {
+    display: none;
+  }
+
+  .wing-artwork-frame {
+    width: 70vw;
+  }
+}
+
+/* Tablets & Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  :root {
+    --scene-padding: 1.2rem;
+  }
+
+  .experience-header {
+    height: 60px;
+    padding: 0 1rem;
+  }
+
+  .brand-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+  }
+
+  .music-player-container {
+    padding: 4px 12px;
+    gap: 0.6rem;
+  }
+
+  .song-title-label {
+    font-size: 0.62rem;
+    max-width: 110px;
+  }
+
+  .chapter-indicator {
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .chapter-number {
+    font-size: 0.75rem;
+  }
+
+  .chapter-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .cinematic-btn {
+    padding: 0.95rem 2rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+  }
+
+  /* Scene 01 */
+  .narrative-name {
+    font-size: 2.8rem;
+  }
+
+  .cosmic-title {
+    font-size: 2.2rem;
+  }
+
+  .cosmic-quote {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Scene 02 */
+  .earth-sphere {
+    width: 250px;
+    height: 250px;
+  }
+
+  .world-line {
+    font-size: 0.95rem;
+  }
+
+  .world-line-highlight {
+    font-size: 1.25rem;
+  }
+
+  /* Scene 03 */
+  .envelope-container {
+    width: 90vw;
+    height: 220px;
+  }
+
+  .recipient-name {
+    font-size: 1.9rem;
+  }
+
+  .letter-paper {
+    padding: 1.8rem 1.4rem;
+    max-height: 82vh;
+  }
+
+  .letter-salutation {
+    font-size: 1.4rem;
+  }
+
+  .letter-body {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    gap: 1.1rem;
+  }
+
+  /* Scene 04: Museum */
+  .hallway-nav-bar {
+    height: 60px;
+    padding: 0 0.8rem;
+  }
+
+  .hallway-wing-tabs {
+    display: none; /* Rely on bottom promenade buttons on small screens */
+  }
+
+  .wing-artwork-frame {
+    width: 88vw;
+    aspect-ratio: 4 / 3;
+    padding: 8px;
+  }
+
+  .wing-plaque {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .wing-title {
+    font-size: 1.3rem;
+  }
+
+  .wing-desc {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .hallway-bottom-controls {
+    height: 60px;
+    padding: 0 0.8rem;
+  }
+
+  .promenade-btn {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.68rem;
+  }
+
+  .foyer-archway {
+    padding: 2rem 1rem;
+  }
+
+  .foyer-title {
+    font-size: 1.8rem;
+  }
+
+  /* Scene 05 */
+  .theatre-name {
+    font-size: 2.6rem;
+  }
+
+  .theatre-line {
+    font-size: 1.1rem;
+  }
+
+  /* Scene 06 */
+  .master-portrait-container {
+    width: 82vw;
+    max-width: 320px;
+  }
+
+  .reveal-name {
+    font-size: 2.2rem;
+  }
+
+  .reveal-message-card {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .reveal-paragraph, .reveal-wishes {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .final-navigation-group {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* Touch devices adjustments */
+@media (hover: none) and (pointer: coarse) {
+  .cinematic-btn:hover {
+    transform: none;
+  }
+
+  .wing-artwork-frame:hover {
+    transform: none;
+  }
+
+  .envelope-container:hover {
+    transform: none;
+  }
+}
