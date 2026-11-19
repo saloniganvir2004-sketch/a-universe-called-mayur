@@ -1393,6 +1393,7 @@ html, body {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity var(--transition-normal), visibility var(--transition-normal);
   padding: 1.5rem;
 }
@@ -1400,6 +1401,7 @@ html, body {
 .museum-modal-backdrop.open {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .museum-modal {

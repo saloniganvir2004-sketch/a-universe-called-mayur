@@ -9,8 +9,9 @@ class SceneAnimationController {
     this.currentWingIndex = 0; // 0 to 4 (Wings 1-4 + Wing 5 Masterpiece)
     this.isLetterOpened = false;
     this.isMuseumDoorsOpened = false;
+    this.isPromenadeTransitioning = false;
 
-    // Museum Wing Exhibition Data
+    // Museum Wing Exhibition Data (All 5 wings defined)
     this.wingsData = [
       {
         id: 'strength',
@@ -43,6 +44,14 @@ class SceneAnimationController {
         quote: 'For everything that makes you who you are. The qualities, personality and individuality that nobody else can replace.',
         curatorNote: 'Out of billions of lives, there is only one Mayur. Your smile, your unique perspective, your distinct presence, and the way you bring light into any space. Nobody else could ever fill the space you occupy.',
         renderArt: (canvas) => this.renderIndividualityArtwork(canvas)
+      },
+      {
+        id: 'masterpiece',
+        num: 'EXHIBITION 05',
+        title: 'THE MASTERPIECE',
+        quote: 'Every gallery has its most precious exhibit. And this one has been waiting for you.',
+        curatorNote: 'Some masterpieces cannot be contained on ordinary walls. The final gallery is prepared for the main character.',
+        renderArt: () => {}
       }
     ];
 
@@ -150,7 +159,7 @@ class SceneAnimationController {
         if (foyerView) foyerView.classList.add('foyer-passed');
         if (hallwayView) hallwayView.classList.add('hallway-entered');
         this.renderAllWingArtwork();
-        this.updateWingDisplay();
+        this.goToWing(0); // Initialize at Wing 1
       }, 1400);
     };
 
@@ -160,55 +169,53 @@ class SceneAnimationController {
     // Hallway Navigation Controls (Previous & Next Wing)
     const prevBtn = document.getElementById('btn-museum-prev-wing');
     const nextBtn = document.getElementById('btn-museum-next-wing');
-    const wingDots = document.querySelectorAll('.museum-wing-tab');
+    const wingTabs = document.querySelectorAll('.museum-wing-tab');
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
+        if (this.isPromenadeTransitioning) return;
         if (this.currentWingIndex > 0) {
-          this.currentWingIndex--;
-          this.updateWingDisplay();
+          this.goToWing(this.currentWingIndex - 1);
         }
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
+        if (this.isPromenadeTransitioning) return;
         if (this.currentWingIndex < 4) {
-          // Allow advancing to Wing 5 only if all 4 wings explored
+          // Allow advancing to Wing 5 only if all 4 appreciation exhibits explored
           if (this.currentWingIndex === 3 && this.visitedWings.size < 4) {
-            this.showCuratorHint('Please explore the 4 appreciation exhibits to unlock the final masterpiece.');
+            this.showCuratorHint('Please explore all 4 appreciation exhibits to unlock the final masterpiece.');
             return;
           }
-          this.currentWingIndex++;
-          this.updateWingDisplay();
+          this.goToWing(this.currentWingIndex + 1);
         }
       });
     }
 
-    wingDots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        if (idx === 4 && this.visitedWings.size < 4) {
-          this.showCuratorHint('Please explore the 4 appreciation exhibits to unlock the final masterpiece.');
-          return;
+    wingTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        if (this.isPromenadeTransitioning) return;
+        const targetIdx = parseInt(tab.getAttribute('data-wing'), 10);
+        if (!isNaN(targetIdx)) {
+          if (targetIdx === 4 && this.visitedWings.size < 4) {
+            this.showCuratorHint('Please explore all 4 appreciation exhibits to unlock the final masterpiece.');
+            return;
+          }
+          this.goToWing(targetIdx);
         }
-        this.currentWingIndex = idx;
-        this.updateWingDisplay();
       });
     });
 
-    // Inspect Artwork / Plaque Modal
-    const inspectBtn = document.getElementById('btn-inspect-wing-artwork');
+    // Inspect Artwork / Plaque Modal Listeners
     const modalBackdrop = document.getElementById('museum-modal-backdrop');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    if (inspectBtn) {
-      inspectBtn.addEventListener('click', () => {
-        this.openCuratorModal(this.currentWingIndex);
-      });
-    }
-
     const closeModal = () => {
-      if (modalBackdrop) modalBackdrop.classList.remove('open');
+      if (modalBackdrop) {
+        modalBackdrop.classList.remove('open');
+      }
     };
 
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
@@ -227,57 +234,76 @@ class SceneAnimationController {
     }
   }
 
-  updateWingDisplay() {
+  // Smoothly glide promenade to specific wing index (0 to 4)
+  goToWing(targetIdx) {
+    if (targetIdx < 0 || targetIdx > 4) return;
+    this.currentWingIndex = targetIdx;
+    this.isPromenadeTransitioning = true;
+
     const hallwayTrack = document.getElementById('museum-wings-track');
     const prevBtn = document.getElementById('btn-museum-prev-wing');
     const nextBtn = document.getElementById('btn-museum-next-wing');
-    const wingDots = document.querySelectorAll('.museum-wing-tab');
+    const wingTabs = document.querySelectorAll('.museum-wing-tab');
     const progressPill = document.getElementById('museum-progress-pill');
-    const currentWing = this.wingsData[this.currentWingIndex];
 
-    // Slide track to current wing (0% to -400%)
+    // CRITICAL MATHEMATICAL FIX:
+    // .museum-wings-track width is 500% (5 chambers of 20% each).
+    // To slide to chamber N, translate by N * 20% of track width.
+    const shiftPercent = this.currentWingIndex * 20;
     if (hallwayTrack) {
-      hallwayTrack.style.transform = `translateX(-${this.currentWingIndex * 100}%)`;
+      hallwayTrack.style.transform = `translateX(-${shiftPercent}%)`;
     }
 
-    // Update buttons
-    if (prevBtn) prevBtn.disabled = (this.currentWingIndex === 0);
+    // Update Previous / Next Buttons
+    if (prevBtn) {
+      prevBtn.disabled = (this.currentWingIndex === 0);
+    }
+
     if (nextBtn) {
       if (this.currentWingIndex === 4) {
         nextBtn.disabled = true;
       } else if (this.currentWingIndex === 3 && this.visitedWings.size < 4) {
         nextBtn.classList.add('locked-btn');
+        nextBtn.disabled = false;
       } else {
         nextBtn.disabled = false;
         nextBtn.classList.remove('locked-btn');
       }
     }
 
-    // Update navigation tabs
-    wingDots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === this.currentWingIndex);
+    // Update Top Navigation Tabs
+    wingTabs.forEach((tab, idx) => {
+      tab.classList.toggle('active', idx === this.currentWingIndex);
     });
 
-    // Mark active wing as explored if it's wings 0-3
-    if (this.currentWingIndex < 4 && currentWing) {
-      this.visitedWings.add(currentWing.id);
-      const wingCard = document.getElementById(`wing-chamber-${currentWing.id}`);
-      if (wingCard) wingCard.classList.add('visited');
+    // Mark current wing as visited if it's wings 0-3
+    if (this.currentWingIndex < 4) {
+      const wing = this.wingsData[this.currentWingIndex];
+      if (wing) {
+        this.visitedWings.add(wing.id);
+        const wingCard = document.getElementById(`wing-chamber-${wing.id}`);
+        if (wingCard) wingCard.classList.add('visited');
+      }
     }
 
-    // Update progress pill
+    // Update Progress Pill
     if (progressPill) {
       progressPill.textContent = `${this.visitedWings.size} of 4 exhibits explored`;
     }
 
-    // If all 4 explored, unlock Wing 05
+    // Unlock Wing 05 when all 4 are visited
     if (this.visitedWings.size >= 4) {
       this.unlockWing05();
     }
+
+    // Release transition lock after smooth CSS slide
+    setTimeout(() => {
+      this.isPromenadeTransitioning = false;
+    }, 1050);
   }
 
   openCuratorModal(wingIdx) {
-    if (wingIdx >= 4) return; // Wing 5 has its own dedicated reveal
+    if (wingIdx < 0 || wingIdx >= 4) return;
     const wing = this.wingsData[wingIdx];
     if (!wing) return;
 
@@ -302,7 +328,7 @@ class SceneAnimationController {
     if (modalMessage) modalMessage.textContent = `“${wing.quote}”`;
     if (modalCurator) modalCurator.textContent = wing.curatorNote;
 
-    if (modalCanvas) {
+    if (modalCanvas && typeof wing.renderArt === 'function') {
       wing.renderArt(modalCanvas);
     }
 
@@ -328,7 +354,10 @@ class SceneAnimationController {
     const wingDot5 = document.querySelector('.museum-wing-tab[data-wing="4"]');
 
     if (chamber05) chamber05.classList.add('unlocked');
-    if (wingDot5) wingDot5.classList.remove('tab-locked');
+    if (wingDot5) {
+      wingDot5.classList.remove('tab-locked');
+      wingDot5.innerHTML = '05. Masterpiece ✨';
+    }
 
     if (btnEnterFinal) {
       btnEnterFinal.removeAttribute('disabled');
@@ -344,7 +373,6 @@ class SceneAnimationController {
   }
 
   transitionToSpotlightScene() {
-    // Hallway lights extinguish sequentially
     const hallway = document.getElementById('museum-hallway-view');
     if (hallway) {
       hallway.style.filter = 'brightness(0.08)';
@@ -367,7 +395,7 @@ class SceneAnimationController {
   renderAllWingArtwork() {
     this.wingsData.forEach(wing => {
       const canvas = document.getElementById(`canvas-wing-${wing.id}`);
-      if (canvas) {
+      if (canvas && typeof wing.renderArt === 'function') {
         wing.renderArt(canvas);
       }
     });
