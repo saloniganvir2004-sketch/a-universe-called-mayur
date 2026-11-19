@@ -57,13 +57,16 @@ class CinematicAudioEngine {
 
     if (this.volumeSlider) {
       this.volumeSlider.addEventListener('input', (e) => {
+        e.stopPropagation();
         this.setVolume(parseFloat(e.target.value));
       });
+      this.volumeSlider.addEventListener('click', (e) => e.stopPropagation());
     }
 
     // Allow scrubbing / seeking by clicking on the progress track
     if (this.progressTrack) {
       this.progressTrack.addEventListener('click', (e) => {
+        e.stopPropagation();
         const rect = this.progressTrack.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const pct = Math.max(0, Math.min(1, clickX / rect.width));

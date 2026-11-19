@@ -339,11 +339,14 @@
             <!-- Wing 05: The Masterpiece (Grand Final Rotunda) -->
             <div id="wing-chamber-masterpiece" class="wing-chamber wing-chamber-masterpiece">
               <div class="gallery-spotlight-cone"></div>
-              <div class="wing-artwork-frame">
+              <div class="wing-artwork-frame masterpiece-chamber-frame" id="frame-chamber-masterpiece" title="Click to view The Masterpiece">
                 <div class="masterpiece-drapes-container">
                   <div id="curtain-left" class="velvet-curtain-left"></div>
                   <div id="curtain-right" class="velvet-curtain-right"></div>
                   <div class="curtain-center-tassel"></div>
+                  <div class="masterpiece-preview-wrapper">
+                    <img src="assets/images/mayur/mayur-portrait-main.jpg" alt="Mayur - The Masterpiece Preview" class="masterpiece-chamber-preview">
+                  </div>
                   <div class="masterpiece-teaser-text">
                     Some masterpieces deserve their own spotlight.
                   </div>
@@ -388,6 +391,47 @@
           <button class="cinematic-btn cinematic-btn-secondary" onclick="document.getElementById('modal-close-btn').click();">
             Return to Hallway Promenade
           </button>
+        </div>
+      </div>
+
+      <!-- The Final Masterpiece Portrait Gallery (Rotunda Chamber) -->
+      <div id="final-portrait-gallery-room" class="final-portrait-gallery-room" role="dialog" aria-modal="true" aria-label="The Masterpiece Final Gallery">
+        <div class="gallery-room-spotlight"></div>
+        <div class="gallery-room-pool"></div>
+
+        <div class="gallery-room-content">
+          <button id="btn-close-final-gallery-x" class="gallery-room-close-btn" aria-label="Return to Museum Hallway">✕</button>
+          
+          <div class="gallery-room-frame-wrapper">
+            <div id="gallery-room-curtain-left" class="gallery-room-curtain curtain-left"></div>
+            <div id="gallery-room-curtain-right" class="gallery-room-curtain curtain-right"></div>
+            
+            <div class="masterpiece-portrait-frame">
+              <div class="portrait-halo-glow"></div>
+              <img 
+                src="assets/images/mayur/mayur-portrait-main.jpg" 
+                alt="Portrait of Mayur - The Masterpiece" 
+                class="masterpiece-photo"
+                loading="eager"
+              >
+            </div>
+          </div>
+
+          <div class="gallery-room-plaque">
+            <div class="gallery-room-badge">Exhibition 05 • The Masterpiece</div>
+            <h3 class="gallery-room-title">Mayur: The Masterpiece</h3>
+            <p class="gallery-room-quote">“Some masterpieces are painted on canvas. But the rarest masterpiece is a human being whose heart, spirit, and presence light up the entire world.”</p>
+            <p class="gallery-room-curator">Out of billions of stars, countless galaxies, and an entire universe, there is one person whose existence makes my world extraordinary. You are not just a part of my universe, Mayur. You are the reason this universe has a meaning to me.</p>
+
+            <div class="gallery-room-actions">
+              <button id="btn-close-final-gallery" class="cinematic-btn cinematic-btn-secondary">
+                Return to Museum Hallway 🏛️
+              </button>
+              <button id="btn-advance-to-theatre" class="cinematic-btn">
+                Proceed to The Spotlight & Theatre <span class="btn-arrow">→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

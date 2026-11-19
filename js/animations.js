@@ -5,11 +5,13 @@
 
 class SceneAnimationController {
   constructor() {
-    this.visitedWings = new Set();
+    this.exploredExhibits = new Set();
     this.currentWingIndex = 0; // 0 to 4 (Wings 1-4 + Wing 5 Masterpiece)
     this.isLetterOpened = false;
     this.isMuseumDoorsOpened = false;
     this.isPromenadeTransitioning = false;
+    this.isFinalGalleryOpen = false;
+    this.isCuratorModalOpen = false;
 
     // Museum Wing Exhibition Data (All 5 wings defined)
     this.wingsData = [
@@ -61,8 +63,10 @@ class SceneAnimationController {
   init() {
     this.setupLetterInteractions();
     this.setupMuseumArchitecture();
+    this.setupFinalPortraitGallery();
     this.setupSpotlightInteractions();
     this.setupArchiveToggle();
+    this.setupGlobalShortcuts();
   }
 
   /* --------------------------------------------------------------------------
@@ -160,7 +164,7 @@ class SceneAnimationController {
         if (hallwayView) hallwayView.classList.add('hallway-entered');
         this.renderAllWingArtwork();
         this.goToWing(0); // Initialize at Wing 1
-      }, 1400);
+      }, 1200);
     };
 
     if (entranceDoors) entranceDoors.addEventListener('click', openMuseumDoors);
@@ -172,7 +176,8 @@ class SceneAnimationController {
     const wingTabs = document.querySelectorAll('.museum-wing-tab');
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (this.isPromenadeTransitioning) return;
         if (this.currentWingIndex > 0) {
           this.goToWing(this.currentWingIndex - 1);
@@ -181,12 +186,12 @@ class SceneAnimationController {
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (this.isPromenadeTransitioning) return;
         if (this.currentWingIndex < 4) {
-          // Allow advancing to Wing 5 only if all 4 appreciation exhibits explored
-          if (this.currentWingIndex === 3 && this.visitedWings.size < 4) {
-            this.showCuratorHint('Please explore all 4 appreciation exhibits to unlock the final masterpiece.');
+          if (this.currentWingIndex === 3 && this.exploredExhibits.size < 4) {
+            this.showCuratorHint(`Please explore all 4 appreciation exhibits to unlock the final masterpiece (${this.exploredExhibits.size} of 4 explored).`);
             return;
           }
           this.goToWing(this.currentWingIndex + 1);
@@ -195,12 +200,12 @@ class SceneAnimationController {
     }
 
     wingTabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        if (this.isPromenadeTransitioning) return;
+      tab.addEventListener('click', (e) => {
+        e.stopPropagation();
         const targetIdx = parseInt(tab.getAttribute('data-wing'), 10);
         if (!isNaN(targetIdx)) {
-          if (targetIdx === 4 && this.visitedWings.size < 4) {
-            this.showCuratorHint('Please explore all 4 appreciation exhibits to unlock the final masterpiece.');
+          if (targetIdx === 4 && this.exploredExhibits.size < 4) {
+            this.showCuratorHint(`Please explore all 4 appreciation exhibits to unlock the final masterpiece (${this.exploredExhibits.size} of 4 explored).`);
             return;
           }
           this.goToWing(targetIdx);
@@ -208,35 +213,132 @@ class SceneAnimationController {
       });
     });
 
-    // Inspect Artwork / Plaque Modal Listeners
+    // Inspect Artwork / Plaque Modal Listeners for Chambers 0-3
+    const inspectButtons = document.querySelectorAll('.btn-inspect-plaque');
+    inspectButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openCuratorModal(idx);
+      });
+    });
+
+    // Also make artwork frames in chambers 0 to 3 directly clickable to approach
+    for (let i = 0; i < 4; i++) {
+      const wingId = this.wingsData[i].id;
+      const chamberEl = document.getElementById(`wing-chamber-${wingId}`);
+      if (chamberEl) {
+        const frame = chamberEl.querySelector('.wing-artwork-frame');
+        if (frame) {
+          frame.style.cursor = 'pointer';
+          frame.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.openCuratorModal(i);
+          });
+        }
+      }
+    }
+
+    // Modal Close Listeners
     const modalBackdrop = document.getElementById('museum-modal-backdrop');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    const closeModal = () => {
-      if (modalBackdrop) {
-        modalBackdrop.classList.remove('open');
+    if (modalCloseBtn) {
+      modalCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeCuratorModal();
+      });
+    }
+
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) {
+          this.closeCuratorModal();
+        }
+      });
+    }
+
+    // Chamber 05 (The Masterpiece) Unlock Actions
+    const enterFinalGalleryBtn = document.getElementById('btn-enter-final-gallery');
+    const chamber05Frame = document.getElementById('frame-chamber-masterpiece');
+
+    const handleMasterpieceClick = (e) => {
+      if (e) e.stopPropagation();
+      if (this.exploredExhibits.size >= 4) {
+        this.openFinalGallery();
+      } else {
+        this.showCuratorHint(`Please explore all 4 appreciation exhibits to unlock the final masterpiece (${this.exploredExhibits.size} of 4 explored).`);
       }
     };
 
-    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-    if (modalBackdrop) {
-      modalBackdrop.addEventListener('click', (e) => {
-        if (e.target === modalBackdrop) closeModal();
+    if (enterFinalGalleryBtn) {
+      enterFinalGalleryBtn.addEventListener('click', handleMasterpieceClick);
+    }
+    if (chamber05Frame) {
+      chamber05Frame.addEventListener('click', handleMasterpieceClick);
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     THE FINAL MASTERPIECE GALLERY ROOM (EXHIBITION 05 ROTUNDA)
+     Open, Close, Reopen, and Gateway to Theatre
+     -------------------------------------------------------------------------- */
+  setupFinalPortraitGallery() {
+    const galleryRoom = document.getElementById('final-portrait-gallery-room');
+    const closeBtn = document.getElementById('btn-close-final-gallery');
+    const closeBtnX = document.getElementById('btn-close-final-gallery-x');
+    const advanceBtn = document.getElementById('btn-advance-to-theatre');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeFinalGallery();
       });
     }
 
-    // Final Gallery Chamber Action
-    const enterFinalGalleryBtn = document.getElementById('btn-enter-final-gallery');
-    if (enterFinalGalleryBtn) {
-      enterFinalGalleryBtn.addEventListener('click', () => {
+    if (closeBtnX) {
+      closeBtnX.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeFinalGallery();
+      });
+    }
+
+    if (advanceBtn) {
+      advanceBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.transitionToSpotlightScene();
       });
     }
+
+    if (galleryRoom) {
+      galleryRoom.addEventListener('click', (e) => {
+        if (e.target === galleryRoom) {
+          this.closeFinalGallery();
+        }
+      });
+    }
+  }
+
+  setupGlobalShortcuts() {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (this.isFinalGalleryOpen) {
+          this.closeFinalGallery();
+        } else if (this.isCuratorModalOpen) {
+          this.closeCuratorModal();
+        }
+      }
+    });
   }
 
   // Smoothly glide promenade to specific wing index (0 to 4)
   goToWing(targetIdx) {
     if (targetIdx < 0 || targetIdx > 4) return;
+
+    if (targetIdx === 4 && this.exploredExhibits.size < 4) {
+      this.showCuratorHint(`Please explore all 4 appreciation exhibits to unlock the final masterpiece (${this.exploredExhibits.size} of 4 explored).`);
+      return;
+    }
+
     this.currentWingIndex = targetIdx;
     this.isPromenadeTransitioning = true;
 
@@ -244,11 +346,8 @@ class SceneAnimationController {
     const prevBtn = document.getElementById('btn-museum-prev-wing');
     const nextBtn = document.getElementById('btn-museum-next-wing');
     const wingTabs = document.querySelectorAll('.museum-wing-tab');
-    const progressPill = document.getElementById('museum-progress-pill');
 
-    // CRITICAL MATHEMATICAL FIX:
-    // .museum-wings-track width is 500% (5 chambers of 20% each).
-    // To slide to chamber N, translate by N * 20% of track width.
+    // 5 chambers in 500% flex container = 20% each
     const shiftPercent = this.currentWingIndex * 20;
     if (hallwayTrack) {
       hallwayTrack.style.transform = `translateX(-${shiftPercent}%)`;
@@ -262,7 +361,7 @@ class SceneAnimationController {
     if (nextBtn) {
       if (this.currentWingIndex === 4) {
         nextBtn.disabled = true;
-      } else if (this.currentWingIndex === 3 && this.visitedWings.size < 4) {
+      } else if (this.currentWingIndex === 3 && this.exploredExhibits.size < 4) {
         nextBtn.classList.add('locked-btn');
         nextBtn.disabled = false;
       } else {
@@ -276,30 +375,47 @@ class SceneAnimationController {
       tab.classList.toggle('active', idx === this.currentWingIndex);
     });
 
-    // Mark current wing as visited if it's wings 0-3
+    // Mark current wing as visited & explored if it's wings 0-3
     if (this.currentWingIndex < 4) {
       const wing = this.wingsData[this.currentWingIndex];
       if (wing) {
-        this.visitedWings.add(wing.id);
-        const wingCard = document.getElementById(`wing-chamber-${wing.id}`);
-        if (wingCard) wingCard.classList.add('visited');
+        this.markExhibitExplored(wing.id);
       }
     }
 
-    // Update Progress Pill
-    if (progressPill) {
-      progressPill.textContent = `${this.visitedWings.size} of 4 exhibits explored`;
-    }
-
-    // Unlock Wing 05 when all 4 are visited
-    if (this.visitedWings.size >= 4) {
-      this.unlockWing05();
-    }
-
-    // Release transition lock after smooth CSS slide
+    // Release transition lock quickly so clicks are never sluggish
     setTimeout(() => {
       this.isPromenadeTransitioning = false;
-    }, 1050);
+    }, 320);
+  }
+
+  markExhibitExplored(wingId) {
+    this.exploredExhibits.add(wingId);
+
+    const chamberCard = document.getElementById(`wing-chamber-${wingId}`);
+    if (chamberCard) {
+      chamberCard.classList.add('visited', 'explored');
+    }
+
+    this.updateProgressUI();
+
+    if (this.exploredExhibits.size >= 4) {
+      this.unlockWing05();
+    }
+  }
+
+  updateProgressUI() {
+    const progressPill = document.getElementById('museum-progress-pill');
+    if (progressPill) {
+      const count = this.exploredExhibits.size;
+      if (count >= 4) {
+        progressPill.textContent = 'All 4 exhibits explored • Masterpiece Unlocked ✨';
+        progressPill.classList.add('all-unlocked');
+      } else {
+        progressPill.textContent = `${count} of 4 exhibits explored`;
+        progressPill.classList.remove('all-unlocked');
+      }
+    }
   }
 
   openCuratorModal(wingIdx) {
@@ -307,14 +423,7 @@ class SceneAnimationController {
     const wing = this.wingsData[wingIdx];
     if (!wing) return;
 
-    this.visitedWings.add(wing.id);
-    const progressPill = document.getElementById('museum-progress-pill');
-    if (progressPill) {
-      progressPill.textContent = `${this.visitedWings.size} of 4 exhibits explored`;
-    }
-    if (this.visitedWings.size >= 4) {
-      this.unlockWing05();
-    }
+    this.markExhibitExplored(wing.id);
 
     const modalBackdrop = document.getElementById('museum-modal-backdrop');
     const modalTag = document.getElementById('modal-tag');
@@ -334,7 +443,40 @@ class SceneAnimationController {
 
     if (modalBackdrop) {
       modalBackdrop.classList.add('open');
+      this.isCuratorModalOpen = true;
     }
+  }
+
+  closeCuratorModal() {
+    const modalBackdrop = document.getElementById('museum-modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove('open');
+    }
+    this.isCuratorModalOpen = false;
+  }
+
+  openFinalGallery() {
+    if (this.exploredExhibits.size < 4) {
+      this.showCuratorHint(`Please explore all 4 appreciation exhibits first (${this.exploredExhibits.size} of 4 explored).`);
+      return;
+    }
+
+    const galleryRoom = document.getElementById('final-portrait-gallery-room');
+    if (galleryRoom) {
+      if (window.cinematicAudio) {
+        window.cinematicAudio.playCurtainSweepSound();
+      }
+      galleryRoom.classList.add('open');
+      this.isFinalGalleryOpen = true;
+    }
+  }
+
+  closeFinalGallery() {
+    const galleryRoom = document.getElementById('final-portrait-gallery-room');
+    if (galleryRoom) {
+      galleryRoom.classList.remove('open');
+    }
+    this.isFinalGalleryOpen = false;
   }
 
   showCuratorHint(msg) {
@@ -352,31 +494,41 @@ class SceneAnimationController {
     const curtainLeft = document.getElementById('curtain-left');
     const curtainRight = document.getElementById('curtain-right');
     const wingDot5 = document.querySelector('.museum-wing-tab[data-wing="4"]');
+    const nextBtn = document.getElementById('btn-museum-next-wing');
 
     if (chamber05) chamber05.classList.add('unlocked');
     if (wingDot5) {
       wingDot5.classList.remove('tab-locked');
       wingDot5.innerHTML = '05. Masterpiece ✨';
+      wingDot5.removeAttribute('disabled');
     }
 
     if (btnEnterFinal) {
       btnEnterFinal.removeAttribute('disabled');
       btnEnterFinal.classList.remove('disabled');
-      btnEnterFinal.innerHTML = 'ENTER THE FINAL GALLERY <span class="btn-arrow">→</span>';
+      btnEnterFinal.innerHTML = 'ENTER THE MASTERPIECE GALLERY <span class="btn-arrow">✨</span>';
     }
 
-    // Subtle parting preview of curtain
-    if (curtainLeft && curtainRight) {
-      curtainLeft.style.transform = 'translateX(-12%)';
-      curtainRight.style.transform = 'translateX(12%)';
+    if (this.currentWingIndex === 3 && nextBtn) {
+      nextBtn.classList.remove('locked-btn');
+      nextBtn.disabled = false;
     }
+
+    // Part curtains in chamber preview
+    if (curtainLeft && curtainRight) {
+      curtainLeft.style.transform = 'translateX(-35%)';
+      curtainRight.style.transform = 'translateX(35%)';
+    }
+
+    this.updateProgressUI();
   }
 
   transitionToSpotlightScene() {
+    this.closeFinalGallery();
     const hallway = document.getElementById('museum-hallway-view');
     if (hallway) {
       hallway.style.filter = 'brightness(0.08)';
-      hallway.style.transition = 'filter 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      hallway.style.transition = 'filter 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
     }
 
     setTimeout(() => {
@@ -386,7 +538,7 @@ class SceneAnimationController {
       if (hallway) {
         hallway.style.filter = '';
       }
-    }, 1500);
+    }, 1200);
   }
 
   /* --------------------------------------------------------------------------
@@ -635,16 +787,34 @@ class SceneAnimationController {
     const l4 = document.getElementById('theatre-line-4');
     const btn = document.getElementById('btn-reveal-main-character');
 
-    setTimeout(() => l1?.classList.add('visible'), 500);
-    setTimeout(() => l2?.classList.add('visible'), 2200);
-    setTimeout(() => l3?.classList.add('visible'), 3900);
-    setTimeout(() => l4?.classList.add('visible'), 5600);
+    const revealAllImmediately = () => {
+      l1?.classList.add('visible');
+      l2?.classList.add('visible');
+      l3?.classList.add('visible');
+      l4?.classList.add('visible');
+      if (btn) {
+        btn.classList.add('visible');
+        btn.removeAttribute('disabled');
+      }
+    };
+
+    // Staggered cinematic reveal
+    setTimeout(() => l1?.classList.add('visible'), 400);
+    setTimeout(() => l2?.classList.add('visible'), 1600);
+    setTimeout(() => l3?.classList.add('visible'), 2800);
+    setTimeout(() => l4?.classList.add('visible'), 4000);
     setTimeout(() => {
       if (btn) {
         btn.classList.add('visible');
         btn.removeAttribute('disabled');
       }
-    }, 7000);
+    }, 5200);
+
+    // Fast-forward on click
+    const scene05 = document.getElementById('scene-05');
+    if (scene05) {
+      scene05.addEventListener('click', revealAllImmediately, { once: true });
+    }
   }
 
   triggerGrandCurtainOpening() {
@@ -662,7 +832,7 @@ class SceneAnimationController {
       if (window.sceneNav) {
         window.sceneNav.goToScene(6);
       }
-    }, 2000);
+    }, 1800);
   }
 
   /* --------------------------------------------------------------------------
@@ -697,6 +867,60 @@ class SceneAnimationController {
   }
 
   resetExperience() {
+    this.exploredExhibits.clear();
+    this.isLetterOpened = false;
+    this.isMuseumDoorsOpened = false;
+    this.currentWingIndex = 0;
+    this.closeFinalGallery();
+    this.closeCuratorModal();
+
+    // Reset Museum Elements
+    const entranceDoors = document.getElementById('museum-entrance-doors');
+    const foyerView = document.getElementById('museum-foyer-view');
+    const hallwayView = document.getElementById('museum-hallway-view');
+    const hallwayTrack = document.getElementById('museum-wings-track');
+    const chamber05 = document.getElementById('wing-chamber-masterpiece');
+    const btnEnterFinal = document.getElementById('btn-enter-final-gallery');
+    const wingDot5 = document.querySelector('.museum-wing-tab[data-wing="4"]');
+    const curtainLeft = document.getElementById('curtain-left');
+    const curtainRight = document.getElementById('curtain-right');
+
+    if (entranceDoors) entranceDoors.classList.remove('doors-open');
+    if (foyerView) foyerView.classList.remove('foyer-passed');
+    if (hallwayView) hallwayView.classList.remove('hallway-entered');
+    if (hallwayTrack) hallwayTrack.style.transform = 'translateX(0%)';
+    if (chamber05) chamber05.classList.remove('unlocked');
+    if (curtainLeft) curtainLeft.style.transform = '';
+    if (curtainRight) curtainRight.style.transform = '';
+
+    if (wingDot5) {
+      wingDot5.classList.add('tab-locked');
+      wingDot5.innerHTML = '05. Masterpiece 🔒';
+    }
+    if (btnEnterFinal) {
+      btnEnterFinal.setAttribute('disabled', 'true');
+      btnEnterFinal.classList.add('disabled');
+      btnEnterFinal.innerHTML = 'Explore Exhibits 1–4 to Unlock <span class="btn-arrow">🔒</span>';
+    }
+
+    // Reset all chamber cards
+    const chambers = document.querySelectorAll('.wing-chamber');
+    chambers.forEach(c => c.classList.remove('visited', 'explored'));
+
+    // Reset Letter
+    const seal = document.getElementById('envelope-seal');
+    const flap = document.getElementById('envelope-flap');
+    const openBtn = document.getElementById('btn-open-letter');
+    const letterPaper = document.getElementById('letter-paper');
+    if (seal) seal.classList.remove('seal-breaking');
+    if (flap) flap.classList.remove('flap-opening');
+    if (openBtn) {
+      openBtn.style.opacity = '1';
+      openBtn.style.pointerEvents = 'auto';
+    }
+    if (letterPaper) letterPaper.classList.remove('open');
+
+    // Reset Theatre & Scene 5/6
     const theatreStage = document.getElementById('grand-theatre-stage');
     const scene05 = document.getElementById('scene-05');
     const scene06 = document.getElementById('scene-06');
@@ -708,6 +932,8 @@ class SceneAnimationController {
     if (scene06) scene06.classList.remove('reveal-active');
     if (archiveContainer) archiveContainer.classList.remove('expanded');
     if (archiveBtn) archiveBtn.innerHTML = 'VIEW THE ARCHIVE: GLIMPSES OF A JOURNEY <span class="btn-arrow">↓</span>';
+
+    this.updateProgressUI();
 
     // Reset music mood to scene 1
     if (window.cinematicAudio) {

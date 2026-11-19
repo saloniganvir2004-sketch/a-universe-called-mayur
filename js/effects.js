@@ -166,27 +166,27 @@ class CosmicEffectsEngine {
     // Stage 1: Intensive Singularity Pulse
     this.creationStage = 1;
 
-    // Stage 2: The Big Bang Explosion (after 800ms)
+    // Stage 2: The Big Bang Explosion (after 600ms)
     setTimeout(() => {
       this.creationStage = 2;
       this.spawnBigBangParticles();
-    }, 800);
+    }, 600);
 
-    // Stage 3: Star Formation (after 2600ms)
+    // Stage 3: Star Formation (after 1600ms)
     setTimeout(() => {
       this.creationStage = 3;
-    }, 2600);
+    }, 1600);
 
-    // Stage 4: Galaxy Formation (after 4500ms)
+    // Stage 4: Galaxy Formation (after 2800ms)
     setTimeout(() => {
       this.creationStage = 4;
-    }, 4500);
+    }, 2800);
 
-    // Stage 5: Personal Revelation & Title (after 6800ms)
+    // Stage 5: Personal Revelation & Title (after 4000ms)
     setTimeout(() => {
       this.creationStage = 5;
       this.revealPersonalNarrative(onComplete);
-    }, 6800);
+    }, 4000);
   }
 
   spawnBigBangParticles() {
@@ -220,31 +220,30 @@ class CosmicEffectsEngine {
     const line3 = document.getElementById('narrative-line-3');
     const mainTitleBlock = document.getElementById('universe-title-block');
     const btnEnter = document.getElementById('btn-enter-universe');
+    const scene01 = document.getElementById('scene-01');
 
-    // "EVERY UNIVERSE BEGINS SOMEWHERE."
-    setTimeout(() => {
+    const revealAll = () => {
       if (line1) line1.classList.add('visible');
-    }, 400);
-
-    // "BUT THIS ONE HAS A NAME."
-    setTimeout(() => {
       if (line2) line2.classList.add('visible');
-    }, 2000);
-
-    // "MAYUR."
-    setTimeout(() => {
       if (line3) line3.classList.add('visible');
-    }, 3600);
-
-    // Title Block + "ENTER YOUR UNIVERSE →"
-    setTimeout(() => {
       if (mainTitleBlock) mainTitleBlock.classList.add('visible');
       if (btnEnter) {
         btnEnter.classList.add('visible');
         btnEnter.removeAttribute('disabled');
       }
       if (onComplete) onComplete();
-    }, 5200);
+    };
+
+    // Staggered Narrative
+    setTimeout(() => { if (line1) line1.classList.add('visible'); }, 300);
+    setTimeout(() => { if (line2) line2.classList.add('visible'); }, 1200);
+    setTimeout(() => { if (line3) line3.classList.add('visible'); }, 2100);
+    setTimeout(() => { revealAll(); }, 3000);
+
+    // Fast forward on click
+    if (scene01) {
+      scene01.addEventListener('click', revealAll, { once: true });
+    }
   }
 
   startScene01Animation() {

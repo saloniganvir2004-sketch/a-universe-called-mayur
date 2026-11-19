@@ -37,19 +37,29 @@ class SceneNavigationEngine {
 
     // Button 2: "ENTER YOUR UNIVERSE →"
     if (btnEnter) {
-      btnEnter.addEventListener('click', () => {
+      btnEnter.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (this.isTransitioning) return;
         this.isTransitioning = true;
         btnEnter.disabled = true;
 
+        // Guaranteed safety release fallback
+        const fallback = setTimeout(() => {
+          this.goToScene(2);
+          this.isTransitioning = false;
+          btnEnter.disabled = false;
+        }, 2200);
+
         // Trigger cosmic warp travel effect
         if (window.cosmicEffects) {
           window.cosmicEffects.triggerWarpTransition(() => {
+            clearTimeout(fallback);
             this.goToScene(2);
             this.isTransitioning = false;
             btnEnter.disabled = false;
           });
         } else {
+          clearTimeout(fallback);
           this.goToScene(2);
           this.isTransitioning = false;
           btnEnter.disabled = false;
@@ -63,7 +73,8 @@ class SceneNavigationEngine {
     const btnDiscover = document.getElementById('btn-discover-world');
     const artifact = document.getElementById('interactive-golden-artifact');
 
-    const handleScene02Advance = () => {
+    const handleScene02Advance = (e) => {
+      if (e) e.stopPropagation();
       if (this.isTransitioning) return;
       this.isTransitioning = true;
       if (btnDiscover) btnDiscover.disabled = true;
@@ -83,7 +94,7 @@ class SceneNavigationEngine {
         this.isTransitioning = false;
         if (btnDiscover) btnDiscover.disabled = false;
         if (earthSphere) earthSphere.classList.remove('earth-approach-active');
-      }, 1400);
+      }, 1200);
     };
 
     if (btnDiscover) btnDiscover.addEventListener('click', handleScene02Advance);
@@ -92,7 +103,8 @@ class SceneNavigationEngine {
 
   setupChapterDotNavigation() {
     this.chapterDots.forEach(dot => {
-      dot.addEventListener('click', () => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
         const targetScene = parseInt(dot.getAttribute('data-scene'), 10);
         // Only allow jumping to already unlocked scenes or current scene
         if (targetScene && !this.isTransitioning && targetScene <= this.currentScene) {
@@ -112,6 +124,7 @@ class SceneNavigationEngine {
     if (targetEl) targetEl.classList.add('active');
 
     this.currentScene = targetSceneNum;
+    this.isTransitioning = false;
     this.updateChapterUI(targetSceneNum);
 
     // Sync Audio Engine Mood
